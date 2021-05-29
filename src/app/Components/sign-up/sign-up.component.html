@@ -1,0 +1,56 @@
+<section id="signUp" class="bg-dark">
+    <div class="container">
+        <form [formGroup]="signUp" (ngSubmit)="signUp.valid&&formData()">
+        <div class="form m-auto ">
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                <input [class.is-valid]="signUp.controls.first_name.status=='VALID'" formControlName="first_name" type="text" placeholder="Enter First Name" class="form-control">
+                <div *ngIf="signUp.controls.first_name.errors&&signUp.controls.first_name.touched"   class="alert  alert-danger" >
+                 <p *ngIf="signUp.controls.first_name.errors.required">First name is required</p>
+                 <p *ngIf="signUp.controls.first_name.errors.minlength">First name is minimum length is 3</p>
+                 <p *ngIf="signUp.controls.first_name.errors.maxlength">First name is maximum length is 10</p>
+                </div>
+                </div>
+                <div class="col-md-6 mb-3 ">
+                    <input [class.is-valid]="signUp.controls.last_name.status=='VALID'" formControlName="last_name" type="text" placeholder="Enter Last Name" class="form-control">
+                    <div *ngIf="signUp.controls.last_name.errors&&signUp.controls.last_name.touched"   class="alert  alert-danger" >
+                        <p *ngIf="signUp.controls.last_name.errors.required">Last name is required</p>
+                        <p *ngIf="signUp.controls.last_name.errors.minlength">Last name is minimum length is 3</p>
+                        <p *ngIf="signUp.controls.last_name.errors.maxlength">Last name is maximum length is 10</p>
+                       </div>
+                </div>
+            </div>
+            <input [class.is-valid]="signUp.controls.email.status=='VALID'" formControlName="email" type="email" placeholder="Enter Your Email" class="form-control mb-3 mt-0">
+            <div *ngIf="signUp.controls.email.errors&&signUp.controls.email.touched"   class="alert  alert-danger" >
+                <p *ngIf="signUp.controls.email.errors.required">Email is required</p>
+                <p *ngIf="signUp.controls.email.errors.email">Email is invalid</p>
+               </div>
+            <input [class.is-valid]="signUp.controls.age.status=='VALID'" formControlName="age" type="number" placeholder="Enter Your Age" class="form-control my-3">
+            <div *ngIf="signUp.controls.age.errors&&signUp.controls.age.touched"   class="alert  alert-danger" >
+                <p *ngIf="signUp.controls.age.errors.required">Age is required</p>
+                <p *ngIf="signUp.controls.age.errors.min">The minimum age is 10</p>
+                <p *ngIf="signUp.controls.age.errors.max">The maximum age is 80</p>
+
+               </div>
+            <input [class.is-valid]="signUp.controls.password.status=='VALID'" formControlName="password" type="password" placeholder="Enter Password" class="form-control my-3">
+            <div *ngIf="signUp.controls.password.errors&&signUp.controls.password.touched"   class="alert  alert-danger" >
+                <p *ngIf="signUp.controls.password.errors.required">password is required</p>
+                <div *ngIf="signUp.controls.password.errors.pattern">
+                    password must contain: 
+                    <ul>
+                    <li>from 8 to 10 characters</li>
+                    <li>at least one number</li> 
+                    <li>both lower and uppercase letters</li> 
+                    <li>at least special character</li></ul>
+                    </div>
+               </div>
+            <button (mouseover)="hover=true" (mouseleave)="hover=false" [disabled]='signUp.invalid' [ngStyle]="signUp.invalid? {'background-color':'gray','border-color':'gray'}:{'background-color':hover==true?'#10707f':'#17a2b8','border-color':hover==true?'#10707f':'#17a2b8'} " class="btn btn-info w-100 disable"><span *ngIf="!isClicked">Sign Up</span><span *ngIf="isClicked">Waiting...</span></button>
+            <div *ngIf="isSuccess" class="alert alert-success text-center my-3" role="alert">{{responseMessage}}</div>
+            <div *ngIf="isRegistered" class="alert alert-danger text-center my-3" role="alert">{{errorMessage}}</div>
+
+        </div>
+    </form>
+    </div>
+    
+
+</section>

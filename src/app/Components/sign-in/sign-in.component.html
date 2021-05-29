@@ -1,0 +1,30 @@
+<section id="signIn" class="bg-dark">
+    <div class="container">
+        <form [formGroup]="signIn" (ngSubmit)="signIn.valid&&formData()">
+        <div class="form  m-auto">
+           
+            <input [class.is-valid]="signIn.controls.email.status=='VALID'" formControlName="email" type="email" placeholder="Enter Your Email" class="form-control my-3">
+                <div *ngIf="signIn.controls.email.errors&&signIn.controls.email.touched"   class="alert  alert-danger" >
+                    <p *ngIf="signIn.controls.email.errors.required">Email is required</p>
+                    <p *ngIf="signIn.controls.email.errors.email">Email is invalid</p>
+                   </div>
+                   <input  [class.is-valid]="signIn.controls.password.status=='VALID'"  formControlName="password" type="password" placeholder="Enter Password" class="form-control my-3">
+                   <div *ngIf="signIn.controls.password.errors&&signIn.controls.password.touched"   class="alert  alert-danger" >
+                       <p *ngIf="signIn.controls.password.errors.required">password is required</p>
+                       <div *ngIf="signIn.controls.password.errors.pattern">
+                           password must contain: 
+                           <ul>
+                           <li>from 8 to 10 characters</li>
+                           <li>at least one number</li> 
+                           <li>both lower and uppercase letters</li> 
+                           <li>at least special character</li></ul>
+                           </div>
+                      </div>
+            <button class="btn btn-info w-100 disable"><span *ngIf="!isClicked">Login</span><span *ngIf="isClicked">Waiting...</span></button>
+            <div *ngIf="isLogged" class="alert alert-danger text-center my-3" role="alert">Incorrect email or password</div>
+        
+        </div>
+    </form>
+    </div>
+    
+</section>
